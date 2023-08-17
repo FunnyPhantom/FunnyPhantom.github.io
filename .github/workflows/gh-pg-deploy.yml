@@ -1,0 +1,21 @@
+name: Deploy Github pages
+on:
+  push:
+    branches: 
+      - gh-pages
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      # url: ${{steps.dep.outputs.page_url}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Make Artifact
+        uses: actions/upload-pages-artifact@v2
+        with: 
+          path: "."
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v2
+        id: "dep"
